@@ -17,10 +17,13 @@
             
 
                 <?php 
-                    if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] == true ) {
+                    if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true ) {
                         // afficher un profil user
                         ?>
                         <h3>Vous êtes déjà logué.</h3>
+
+                        <a href="disconnect.php" class="btn btn-danger">Deconnexion</a>
+
                         <?php
                     }
 
