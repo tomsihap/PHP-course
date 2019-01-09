@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,21 +15,38 @@
         <div class="row">
             <div class="col-md-12">
             
-                <h3>Formulaire de connexion :</h3>
 
-                <form action="login.php" method="POST">
-                    <label for="emailInput">Adresse e-mail</label>
-                    <input id="emailInput" class="form-control" type="email" name="email" required>
+                <?php 
+                    if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] == true ) {
+                        // afficher un profil user
+                        ?>
+                        <h3>Vous êtes déjà logué.</h3>
+                        <?php
+                    }
 
-                    <label for="passwordInput">Mot de passe</label>
-                    <input id="passwordInput" class="form-control" type="password" name="password" required>
+                    else {
+                        // afficher la login page
+                        ?>
+                        <h3>Formulaire de connexion :</h3>
 
-                    <hr>
+                        <form action="login.php" method="POST" enctype="multipart/form-data">
+                            <label for="emailInput">Adresse e-mail</label>
+                            <input id="emailInput" class="form-control" type="email" name="email" required>
 
-                    <button type="submit" class="btn btn-success float-right">Connexion</button>
+                            <label for="passwordInput">Mot de passe</label>
+                            <input id="passwordInput" class="form-control" type="password" name="password" required>
 
-                </form>
-            
+                            <label for="fileInput">CV en .pdf</label>
+                            <input type="file" name="fichier" id="fileInput">
+
+                            <hr>
+
+                            <button type="submit" class="btn btn-success float-right">Connexion</button>
+
+                        </form>
+                        
+                    <?php } ?>
+
             </div>
         </div>
     </div>
