@@ -19,11 +19,29 @@ $septCube   = cube(7);
 
 
 function afficheEnGras($t) {
-    return "<strong>" . $t . "</strong>";
+
+    $phrase = "<strong>" . $t . "</strong>";
+
+    return $phrase;
 }
 
 echo afficheEnGras('thomas');
 
+echo '<br>';
+
+echo "timestamp actuel: " . time();
+
+echo '<br>';
+
+date('d M Y H:i:s', 154541214);
+date('d M Y H:i:s');
+
+echo "<br>";
+
+
+$var = "5";
+
+intval($var);
 
 function surface($longueur, $largeur) {
 
@@ -33,8 +51,26 @@ function surface($longueur, $largeur) {
 
 }
 
-echo "Votre appartement mesure " . surface(5, 3) . "m²";
+echo "Votre appartement mesure " . surface(5, 2) . "m²";
 echo '<br>';
+
+
+function surfacePresquePrete($longueur, $largeur = 15) {
+
+    $s = $longueur * $largeur;
+
+    return $s;
+
+}
+
+echo "Votre appartement calculé avec une largeur connue de 15m mesure " . surfacePresquePrete(6, 20) . "m²";
+
+echo '<br>';
+
+
+$portefeuilleEur = 100;
+
+//echo $portefeuilleEur . " € correspondent à " . convertEurYen($portefeuilleEur) . " yen.";
 
 
 function volumeCylindre($rayon, $hauteur) {
@@ -220,23 +256,25 @@ echo "</pre>";
 
 function convertTableauxRecursifs($tableauQuelconque) {
 
-    // On ouvre le tableau
+    // On ouvre la liste
     echo "<ul>";
 
         // Pour chaque élément du tableau en tant que clé=>valeur (key=>potentielSousTableau)
         foreach ($tableauQuelconque as $key => $potentielSousTableau) {
 
             // On affiche déjà
-            echo "<li>" . $key . "</li>";
+            echo "<li>" . $key ;
 
             // si $potentielSousTableau est effectivement un sous tableau (is_array)...
             if (is_array($potentielSousTableau)) {
+
+                echo "</li>";
 
                 // Alors il repasse dans la même fonction !
                 // C'est à dire qu'on réouvre un <ul> (voir ci-dessus)
                 // et qu'on reteste s'il a des enfants sous-tableaux.
                 echo "<li>";
-                convertTableauxRecursifs($potentielSousTableau);
+                    convertTableauxRecursifs($potentielSousTableau);
                 echo "</li>";
             }
 
@@ -244,7 +282,7 @@ function convertTableauxRecursifs($tableauQuelconque) {
             else {
 
                 // Alors c'est une valeur (string/bool/int), on l'affiche.
-                echo "<li>" . $potentielSousTableau . "</li>";
+                echo " : " . $potentielSousTableau . "</li>";
             }
         }
 
