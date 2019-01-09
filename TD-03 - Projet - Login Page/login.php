@@ -5,7 +5,6 @@ session_start();
 $emailValide = "admin@gmail.com";
 $passwordValide = "qsdfgh";
 
-
 if( isset($_POST['email']) && $_POST['email'] === $emailValide ) {
     // Cas où l'email est correct   
 
