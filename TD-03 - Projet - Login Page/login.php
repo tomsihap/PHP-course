@@ -1,22 +1,26 @@
 <?php
+session_start();
 
-echo "<pre>";
-var_dump($_POST);
-echo "</pre>";
 
 $emailValide = "admin@gmail.com";
 $passwordValide = "qsdfgh";
 
 
 if( isset($_POST['email']) && $_POST['email'] === $emailValide ) {
-    // Cas où l'email est correct
+    // Cas où l'email est correct   
 
     if ( isset( $_POST['password'] ) && $_POST['password'] === $passwordValide ) {
+
+        $_SESSION['is_logged_in'] = true;
+
         // Cas où l'utilisateur est loggué
 
         ?>
             <h3>Bienvenue sur votre profil, <?= $_POST['email']; ?></h3>
-            <p>Lorem ipsum dolor sit amet <strong>consectetur</strong> adipisicing elit. Autem praesentium fugiat dolores culpa id laborum atque neque, quis sunt voluptatum ullam vero quos voluptatem dignissimos repudiandae maiores inventore necessitatibus? Nemo!</p>
+            <p>Lorem ipsum dolor sit amet <strong>consectetur</strong> adipisic
+            ing elit. Autem praesentium fugiat dolores culpa id laborum atque 
+            neque, quis sunt voluptatum ullam vero quos voluptatem dignissimos
+             repudiandae maiores inventore necessitatibus? Nemo!</p>
 
         <?php
     }
