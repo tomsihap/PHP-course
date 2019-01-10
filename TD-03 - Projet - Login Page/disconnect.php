@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once('helper.php');
 
 if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true) {
 
