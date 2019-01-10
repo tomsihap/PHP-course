@@ -1,42 +1,49 @@
 <?php
 session_start();
 
+function connectDb($dbname='', $login = 'root', $password = '', $port='3306', $host = 'localhost') {
+    try {
+        // Essaie de faire ce script...
+        $bdd = new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8;port='.$port, $login, $password);
 
-$emailValide = "admin@gmail.com";
-$passwordValide = "qsdfgh";
-
-if( isset($_POST['email']) && $_POST['email'] === $emailValide ) {
-    // Cas où l'email est correct   
-
-    if ( isset( $_POST['password'] ) && $_POST['password'] === $passwordValide ) {
-
-        $_SESSION['is_logged_in'] = true;
-
-        // Cas où l'utilisateur est loggué
-
-        ?>
-            <h3>Bienvenue sur votre profil, <?= $_POST['email']; ?></h3>
-            <p>Lorem ipsum dolor sit amet <strong>consectetur</strong> adipisic
-            ing elit. Autem praesentium fugiat dolores culpa id laborum atque 
-            neque, quis sunt voluptatum ullam vero quos voluptatem dignissimos
-             repudiandae maiores inventore necessitatibus? Nemo!</p>
-
-        <?php
+        return $bdd;
     }
-
-    else {
-
-        ?>
-            <p><strong>Attention :</strong> le mot de passe est incorrect !</p>
-        <?php
-        // Cas où l'utilisateur existe mais le mot de passe n'est pas correct
+    catch (Exception $e) {
+        // Sinon, capture l'erreur et affiche la
+        die('Erreur : ' . $e->getMessage());
     }
-
 }
+
+
+$bdd = connectDb('phpcourse', 'root', '', 3308);
+
+
+$response = $bdd->query('
+        SELECT * 
+        FROM users
+        WHERE email = "'.$_POST['email'].'"
+        AND password = "'.$_POST['password'].'"
+    ');
+
+$donnees = $response->fetch();
+
+if ($donnees){
+
+    $_SESSION['is_logged_in'] = true; ?>
+
+
+    <p>Bienvenue <?= $_POST['email']; ?> !</p>
+
+    <a href="disconnect.php" class="btn btn-danger">Deconnexion</a>
+
+    <?php
+}
+
 else {
-    // Cas où l'e-mail n'existe pas
+    // Cas KO : l'user n'est pas logué, on envoie une erreur "Erreur login"
     ?>
-            <p><strong>Attention :</strong> l'email n'existe pas !</p>
+        <p style="color:red"><strong>Attention :</strong> Problème de login !</p>
+        <a href="form.php" class="btn btn-danger">Retour au formulaire</a>
 
     <?php
 }
