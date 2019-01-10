@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php require_once('helper.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
